@@ -87,11 +87,11 @@
     justify-content: center;
     align-items: center;
     background: #fff;
-    z-index: 2;
+    z-index: 99;
 }
 
 
-.dropdown .dropdown-content .dropdown-item {
+/* .dropdown .dropdown-content .dropdown-item {
     width: 100%;
     padding: 10px;
     text-align: center;
@@ -104,7 +104,7 @@
     background: #1D7328;
     opacity: 0.8;
     color: #fff;
-}
+} */
 
 .right {
     display: flex;

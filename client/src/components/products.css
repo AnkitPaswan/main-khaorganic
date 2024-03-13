@@ -1,4 +1,7 @@
 .products-container {
+    /* background-image: url('../assests/banner.jpg');
+    background-repeat: no-repeat, repeat;
+    background-size: cover; */
     background-color: #F7F8FC;
     padding: 75px 0px;
 }

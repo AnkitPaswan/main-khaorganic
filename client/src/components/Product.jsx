@@ -20,15 +20,16 @@ const Product = ({ item }) => {
             transition={{ duration: 1 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: false }}
-            onClick={() => navigate(`/singleproduct/${item.id}`)} >
+            onClick={() => navigate(`/product/${item._id}`)}
+             >
 
             <div className="thumbnail">
                 <img src={item.img} alt="" />
             </div>
             <div className="prod-details">
-                <span className="name">{item.title}</span>
-                <span className="qty">QTY: {item.qty}</span>
-                <span className="price">&#8377; {item.price}</span>
+                <span className="name">{item?.title}</span>
+                <span className="qty">QTY: {item?.qty}</span>
+                <span className="price">&#8377; {item?.price}</span>
             </div>
             <div className="prod-btn">
                 <div className="view-detail">

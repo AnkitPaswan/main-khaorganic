@@ -3,28 +3,54 @@ import Header from '../components/Header'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import { useState, useEffect } from "react";
+import { publicRequest } from "../utils/requestMethod";
 import { useLocation } from 'react-router-dom';
-import './SingleProduct.css'
+import './Product.css'
+import { addToCart } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 
-const SingleProduct = () => {
+const Product = () => {
 
     const location = useLocation();
+    const id = location.pathname.split("/")[2];
+    const [product, setProduct] = useState({});
+    const [quantity, setQuantity] = useState(1);
+    const dispatch = useDispatch();
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location]);
 
-    const [quantity, setQuantity] = useState(1);
-    const increment = () => {
-        setQuantity((prevState) => prevState + 1);
-    }
+    useEffect(() => {
+        const getProduct = async () => {
+          try {
+            const res = await publicRequest.get("/products/find/" + id);
+            setProduct(res.data);
+            console.log(res.data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        getProduct()
+      }, [id]);
 
-    const decrement = () => {
-        setQuantity((prevState) => {
-            if (prevState === 1) return 1
-            return prevState - 1;
-        });
-    }
+      const handleQuantity = (type) => {
+        if (type === 'desc') {
+          quantity > 1 && setQuantity(quantity - 1)
+        } else {
+          setQuantity(quantity + 1)
+        }
+      }
+    
+      const handleClick = () => {
+        dispatch(
+          addToCart({ ...product, quantity  })
+        )
+      };
+
 
     return (
         <>
@@ -35,24 +61,21 @@ const SingleProduct = () => {
                 <div className="layout">
                     <div className="single-product-page">
                         <div className="left">
-                            <img src={"https://i.imgur.com/gqZoppx.png"} alt="" />
+                            <img src={product.img} alt="" />
                         </div>
                         <div className="right">
-                            <span className="name">Lokwan Wheat Atta</span>
-                            <span className="qty">QTY: 500 g</span>
-                            <span className="price">&#8377; 1200</span>
-                            <span className="desc">Lokwan wheat Atta is a nutritious, healthy, and versatile food that is a good choice for people of all ages and dietary needs. it is a great way to start your day or enjoy as a healthy snack.</span>
+                            <span className="name">{product.title}</span>
+                            <span className="qty">{product.qty}</span>
+                            <span className="price">&#8377; {product.price}</span>
+                            <span className="desc">{product.desc}</span>
 
                             <div className="cart-buttons">
                                 <div className="quantity-buttons">
-                                    <span onClick={decrement}>-</span>
+                                    <span  onClick={() => handleQuantity("desc")}><RemoveIcon/></span>
                                     <span>{quantity}</span>
-                                    <span onClick={increment}>+</span>
+                                    <span onClick={() => handleQuantity("inc")}><AddIcon/></span>
                                 </div>
-                                <button className="add-to-cart-button" onClick={() => {
-                                    // handleAddToCart(data.data[0], quantity);
-                                    setQuantity(1);
-                                }}>
+                                <button className="add-to-cart-button" onClick={handleClick}>
                                     {/* <FaCartPlus size={20} /> */}
                                     Add to cart
                                 </button>
@@ -84,4 +107,4 @@ const SingleProduct = () => {
     )
 }
 
-export default SingleProduct
+export default Product

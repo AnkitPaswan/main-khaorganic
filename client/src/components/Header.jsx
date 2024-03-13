@@ -8,8 +8,12 @@ import { useNavigate } from "react-router-dom";
 import logo from "../assests/khaorganic-logo1.jpg";
 import MenuIcon from '@mui/icons-material/Menu';
 import Search from "./Search";
+import { useSelector } from "react-redux";
+import Categories from './Categories'
+
 const Header = () => {
 
+    const quantity = useSelector(state => state.cart.quantity)
     const menuRef = useRef();
     const [showSearch, setShowSearch] = useState(false);
     const dropdown_toggle = (e) => {
@@ -48,17 +52,16 @@ const Header = () => {
                     </div>
                     <div ref={menuRef} className="center" >
                         <li onClick={() => navigate("/")}>Home</li>
-                        <li className="dropdown">
-
-                            <div className="dropdown-btn" onClick={(e) => { setIsActive(!isActive) }}>
+                        <li className="dropdown" onClick={(e) => { setIsActive(!isActive) }}>
+                            <div className="dropdown-btn" >
                                 Products
                                 <ArrowDropDownIcon />
                             </div>
                             {isActive && (
                                 <div className="dropdown-content">
-                                    <div className="dropdown-item">Atta</div>
-                                    <div className="dropdown-item">Besan</div>
-                                    <div className="dropdown-item">Daliya</div>
+                                    <Categories/>
+                                    {/* <div className="dropdown-item">Besan</div>
+                                    <div className="dropdown-item">Daliya</div> */}
                                 </div>
                             )}
                         </li>
@@ -69,7 +72,7 @@ const Header = () => {
                         <li> <SearchIcon onClick={() => setShowSearch(true)} /></li>
                         <span className="cart-icon" onClick={() => navigate("/Cart")}>
                             <ShoppingCartOutlinedIcon />
-                            <span>5</span>
+                            <span>{quantity}</span>
                         </span>
                         <li className='sign' onClick={() => navigate("/Login")}>Sign in</li>
                     </div>

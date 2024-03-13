@@ -4,14 +4,18 @@ import './Cart.css';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
-// import { useNavigate } from "react-router-dom";
-import { popularProducts } from '../utils/data';
 import Header from '../components/Header'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
+import { useSelector } from "react-redux";
+import { incrementQuantity, decrementQuantity, removeItem } from "../redux/cartRedux";
+import { useDispatch } from 'react-redux';
 
 const Cart = () => {
-    // const navigate = useNavigate();
+
+    const cart = useSelector(state => state.cart);
+  console.log(cart.total);
+  const dispatch = useDispatch()
 
     return (
 
@@ -28,12 +32,12 @@ const Cart = () => {
                 </div>
                 <div className="bottom">
                     <div className="info">
-                        {/* {!popularProducts.length && <div className="empty-cart">
-                            <img src="https://rackstore.be/assets/images/empty-cart.png" alt="sorry" />
-                            <p> Your cart is empty.</p>
-                            <span>Add something to make me happy :)</span>
-                            </div>} */}
-                        {popularProducts.slice(2).map((product) => (
+                    {!cart.products.length && <div className="empty-cart">
+              <img src="https://rackstore.be/assets/images/empty-cart.png" alt="sorry" />
+              <p> Your cart is empty.</p>
+              <span>Add something to make me happy :)</span>
+            </div>}
+                        {cart.products.map((product) => (
                             <div className="product" key={product.id} product={product}>
                                 <div className="product-detail">
                                     <img src={product.img} alt="" />
@@ -42,7 +46,7 @@ const Cart = () => {
                                             <b>Product:</b> {product.title}
                                         </div>
                                         <div className="product-id">
-                                            <b>ID:</b> {product.id}
+                                            <b>ID:</b> {product._id}
                                         </div>
                                         <div className="product-color">
                                             <b>QTY:</b> {product.qty}
@@ -51,18 +55,16 @@ const Cart = () => {
                                 </div>
 
                                 <div className="PriceDetail">
-                                    <button ><DeleteIcon /></button>
+                                    <button onClick={() => dispatch(removeItem(product))} ><DeleteIcon /></button>
                                     <div className="ProductAmountContainer">
                                         <div className="quantity-btn">
-                                            <span ><RemoveIcon /></span>
-                                            <span>2</span>
-                                            <span ><AddIcon /></span>
+                                            <span onClick={() => dispatch(decrementQuantity(product))}><RemoveIcon /></span>
+                                            <span>{product.quantity}</span>
+                                            <span onClick={() => dispatch(incrementQuantity(product))}><AddIcon /></span>
                                         </div>
                                     </div>
-                                    <div className="ProductPrice">&#8377; {product.price * 2}.00</div>
-
+                                    <div className="ProductPrice">&#8377; {product.price * product.quantity}.00</div>
                                 </div>
-                                {/* <button ><DeleteIcon /></button> */}
 
                             </div>))}
                         <hr />
@@ -87,7 +89,7 @@ const Cart = () => {
                         <hr />
                         <div className="SummaryItem">
                             <div className="SummaryItemText" type="total"><span> Total</span></div>
-                            <div className="SummaryItemPrice"> <span>&#8377; 1200.00</span></div>
+                            <div className="SummaryItemPrice"> <span>&#8377; 500.00</span></div>
 
                         </div>
                         <button>CHECKOUT NOW</button>
