@@ -30,7 +30,7 @@ const Products = ({ cat,filters, headingText, innerpage }) => {
     }, [products, cat, filters]);
 
     return (
-        <div className="products-container">
+        <div className="products-container" >
             {!innerpage && <motion.div className="sec-heading"
                 initial={{ opacity: 0, x: -40 }}
                 transition={{ duration: 1 }}

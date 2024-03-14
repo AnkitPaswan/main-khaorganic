@@ -59,7 +59,9 @@
     overflow: auto;
     margin: 20px 0;
 }
-
+.search-results::-webkit-scrollbar{
+    display: none;
+}
 .search-result-item {
     display: flex;
     align-items: center;
@@ -84,8 +86,6 @@
 
 .search-result-item .prod-details {
     overflow: hidden;
-
-
 }
 
 .search-result-item .prod-details .name {
@@ -98,7 +98,6 @@
     font-weight: 600;
     display: block;
 }
-
 .search-result-item .prod-details .desc {
     font-size: 14px;
     line-height: 1;
@@ -108,7 +107,6 @@
     overflow: hidden;
     color: rgba(0, 0, 0, 0.5);
 }
-
 @keyframes slideSearchWindow {
     0% {
         transform: translateY(100%);

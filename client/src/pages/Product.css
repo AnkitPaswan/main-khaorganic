@@ -19,15 +19,16 @@
 .single-product-page .left {
     background-color: rgba(0, 0, 0, 0.05);
     flex-shrink: 0;
+    justify-content: center;
     width: 40%;
 }
 
 .single-product-page .left img {
-    width: 80%;
-    height: 100%;
+    width: auto;
+    height: 400px;
+    object-fit: cover;
     display: block;
     padding: 20px;
-    display: block;
     margin: 0 auto;
 }
 
@@ -196,5 +197,6 @@
     .single-product-page .right {
         width: 100%;
         font-size: 1em;
+        margin-top: 10px;
     }
 }

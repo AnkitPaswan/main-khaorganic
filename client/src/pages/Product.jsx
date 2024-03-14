@@ -10,7 +10,7 @@ import { addToCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const Product = () => {
 
@@ -76,7 +76,7 @@ const Product = () => {
                                     <span onClick={() => handleQuantity("inc")}><AddIcon/></span>
                                 </div>
                                 <button className="add-to-cart-button" onClick={handleClick}>
-                                    {/* <FaCartPlus size={20} /> */}
+                                    <AddShoppingCartIcon size={20} />
                                     Add to cart
                                 </button>
                             </div>

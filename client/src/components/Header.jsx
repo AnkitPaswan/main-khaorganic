@@ -60,8 +60,6 @@ const Header = () => {
                             {isActive && (
                                 <div className="dropdown-content">
                                     <Categories/>
-                                    {/* <div className="dropdown-item">Besan</div>
-                                    <div className="dropdown-item">Daliya</div> */}
                                 </div>
                             )}
                         </li>

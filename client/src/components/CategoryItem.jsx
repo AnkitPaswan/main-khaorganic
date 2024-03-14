@@ -1,14 +1,13 @@
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./CategoryItem.css";
 
 
 const CategoryItem = ({ item }) => {
+  const navigate = useNavigate();
   return (
-    <div className="categoryItem">
-      <Link to={`/products/${item.cat}`} >
+    <div className="categoryItem" onClick={() =>{ navigate(`/products/${item.cat}`)}}>
           <h1>{item.title}</h1>
-      </Link>
     </div>
   );
 };

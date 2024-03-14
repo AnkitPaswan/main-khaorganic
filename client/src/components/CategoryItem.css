@@ -9,9 +9,6 @@
     cursor: pointer;
     transition: all 0.2s;
 }
-.categoryItem a{
-    text-decoration: none;
-}
 
 .categoryItem h1:hover{
     background: #1D7328;
