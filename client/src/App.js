@@ -1,11 +1,11 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import Product from "./pages/Product";
-import LoginPage from "./pages/LoginPage";
-import SignUp from "./pages/SignUp";
-import Cart from "./pages/Cart";
-import ContactUs from "./pages/ContactUs";
-import ProductList from "./pages/ProductList";
+import Product from "./pages/Product/Product";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import SignUp from "./pages/SignUpPage/SignUp";
+import Cart from "./pages/Cart/Cart";
+import ContactUs from "./pages/ContactPage/ContactUs";
+import ProductList from "./pages/ProductList/ProductList";
 // const user = useSelector((state) => state.user.currentUser);
 
 function App() {

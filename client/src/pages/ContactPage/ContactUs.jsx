@@ -1,8 +1,8 @@
 import React from 'react'
 import './ContactUs.css'
-import Footer from '../components/Footer'
-import Announcement from '../components/Announcement'
-import Header from '../components/Header'
+import Footer from '../../components/Footer/Footer'
+import Announcement from '../../components/Announcement/Announcement'
+import Header from '../../components/Header/Header'
 
 const ContactUs = () => {
     return (

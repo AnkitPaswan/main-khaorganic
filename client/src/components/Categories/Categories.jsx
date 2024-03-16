@@ -1,7 +1,7 @@
 
 import React from 'react'
-import { categories } from "../utils/data";
-import CategoryItem from "./CategoryItem";
+import { categories } from "../../utils/data";
+import CategoryItem from "../CategoryItem/CategoryItem";
 const Categories = () => {
   return (
     <div className="categories" style={{  width: "100%" }}>

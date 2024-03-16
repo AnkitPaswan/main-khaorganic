@@ -1,9 +1,9 @@
 import React from 'react'
 import './Whywe.css'
-import firstImg from "../assests/midbanner.png"
-import secImg from "../assests/midbanner-2.png"
-import thirdImg from "../assests/midbanner-3.png"
-import forthdImg from "../assests/midbanner-4.png"
+import firstImg from "../../assests/midbanner.png"
+import secImg from "../../assests/midbanner-2.png"
+import thirdImg from "../../assests/midbanner-3.png"
+import forthdImg from "../../assests/midbanner-4.png"
 import { motion } from 'framer-motion';
 const Whywe = ({ headTag }) => {
     return (

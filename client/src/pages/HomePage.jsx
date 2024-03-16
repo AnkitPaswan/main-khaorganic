@@ -1,12 +1,12 @@
 import React from 'react'
-import Header from '../components/Header'
-import Banner from '../components/Banner'
-import Announcement from '../components/Announcement'
-import Footer from '../components/Footer'
-import Products from '../components/Products'
-import Philosophybanner from '../components/Philosophybanner'
-import Whywe from '../components/Whywe'
-import Newsletter from '../components/Newsletter'
+import Header from '../components/Header/Header'
+import Banner from '../components/Banner/Banner'
+import Announcement from '../components/Announcement/Announcement'
+import Footer from '../components/Footer/Footer'
+import Products from '../components/Products/Products'
+import Philosophybanner from '../components/Philosophybanner/Philosophybanner'
+import Whywe from '../components/Whywe/Whywe'
+import Newsletter from '../components/Newsletter/Newsletter'
 
 const HomePage = () => {
     return (

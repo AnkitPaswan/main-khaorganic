@@ -13,20 +13,20 @@ const Search = ({ setShowSearch }) => {
     useEffect(() =>{
         const getProducts = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/products");
+                const res = await axios.get(`http://localhost:5000/api/products/search?q=${query}`);
                 setProducts(res.data);
             } catch (error) {
                 console.log(error);
             }
         };
         getProducts();
-    }, []);
+    }, [query]);
 
     console.log(products);
 
-    let searchResult = products.filter((item) => (item.title.toLowerCase().includes(query)) || (item.title.toUpperCase().includes(query)));
+    // let searchResult = products.filter((item) => (item.title.toLowerCase().includes(query)) || (item.title.toUpperCase().includes(query)));
     
- console.log(query);
+//  console.log(query);
 
     return (
         <div className="search-modal">
@@ -44,11 +44,12 @@ const Search = ({ setShowSearch }) => {
             <div className="search-result-content">
                 <div className="search-results">
                     {
-                        searchResult.length === 0 ? (
+                        products?.length === 0 ? (
                             <h3>No result found "{query}"</h3>
                         ):
-                       ( (query) && searchResult.map((item) => (
+                       ( (query) && products.map((item) => (
                            <div className="search-result-item" onClick={() => {
+                            // navigate(`/product/search?q=${item.title}`);
                             navigate("/product/" + item._id);
                             setShowSearch(false);
                         }}>

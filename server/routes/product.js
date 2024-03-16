@@ -84,4 +84,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+// search query for products
+
+router.get("/search", async (req, res) => {
+  const { q } = req.query;
+  // console.log(q);
+  try {
+    if (!q.length === 0)
+      return res.status(400).json({ message: "No query found" });
+    const regex = new RegExp(q, "i");
+    const results = await Product.find({ $or: [{ title: regex }] });
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

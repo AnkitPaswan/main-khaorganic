@@ -27,6 +27,9 @@
     display: block;
     height: 75%;
     width: fit-content;
+    /* width: 80%; */
+    /* aspect-ratio: 3 / 2; */
+    /* object-fit: contain; */
     z-index: 2;
 
 }

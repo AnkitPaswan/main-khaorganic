@@ -9,7 +9,8 @@
 }
 
 .newsletter h1 {
-    font-size: 70px;
+    /* font-size: 70px; */
+    font-size: clamp(40px, 10vw, 70px);
     margin-bottom: 20px;
     color: #1D7328;
 }
@@ -92,9 +93,9 @@
         padding: 20px;
     }
 
-    .newsletter h1 {
+    /* .newsletter h1 {
         font-size: 3em;
-    }
+    } */
 
     .newsletter p {
         font-size: 18px;

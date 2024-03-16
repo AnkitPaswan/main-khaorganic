@@ -1,7 +1,7 @@
 import React from 'react'
 import './SignUp.css'
-import Register from '../assests/signup.svg'
-import Profile from '../assests/profile.svg'
+import Register from '../../assests/signup.svg'
+import Profile from '../../assests/profile.svg'
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';

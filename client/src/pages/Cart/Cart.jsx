@@ -4,11 +4,11 @@ import './Cart.css';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Header from '../components/Header'
-import Announcement from '../components/Announcement'
-import Footer from '../components/Footer'
+import Header from '../../components/Header/Header'
+import Announcement from '../../components/Announcement/Announcement'
+import Footer from '../../components/Footer/Footer'
 import { useSelector } from "react-redux";
-import { incrementQuantity, decrementQuantity, removeItem } from "../redux/cartRedux";
+import { incrementQuantity, decrementQuantity, removeItem } from "../../redux/cartRedux";
 import { useDispatch } from 'react-redux';
 
 const Cart = () => {

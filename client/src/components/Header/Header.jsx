@@ -4,12 +4,13 @@ import "./Header.css";
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import { useNavigate } from "react-router-dom";
-import logo from "../assests/khaorganic-logo1.jpg";
+import logo from "../../assests/khaorganic-logo1.jpg";
 import MenuIcon from '@mui/icons-material/Menu';
-import Search from "./Search";
+import Search from "../Search/Search.jsx";
 import { useSelector } from "react-redux";
-import Categories from './Categories'
+import Categories from '../Categories/Categories'
 
 const Header = () => {
 
@@ -65,6 +66,10 @@ const Header = () => {
                         </li>
                         <li>About</li>
                         <li onClick={() => navigate("/contactUs")}>Contact</li>
+                        <li className='sign' onClick={() => navigate("/Login")}> 
+                        <PermIdentityIcon/>
+                        Sign in</li>
+                        {/* <li onClick={() => navigate("/contactUs")}>Contact</li> */}
                     </div>
                     <div className="right">
                         <li> <SearchIcon onClick={() => setShowSearch(true)} /></li>

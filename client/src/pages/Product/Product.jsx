@@ -1,12 +1,12 @@
 import React from 'react'
-import Header from '../components/Header'
-import Announcement from '../components/Announcement'
-import Footer from '../components/Footer'
+import Header from '../../components/Header/Header'
+import Announcement from '../../components/Announcement/Announcement'
+import Footer from '../../components/Footer/Footer'
 import { useState, useEffect } from "react";
-import { publicRequest } from "../utils/requestMethod";
+import { publicRequest } from "../../utils/requestMethod";
 import { useLocation } from 'react-router-dom';
 import './Product.css'
-import { addToCart } from "../redux/cartRedux";
+import { addToCart } from "../../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';

@@ -1,8 +1,8 @@
 import React from 'react'
 import './LoginPage.css'
 import { useNavigate } from "react-router-dom";
-import SignIn from '../assests/login.svg'
-import Profile from '../assests/profile.svg'
+import SignIn from '../../assests/login.svg'
+import Profile from '../../assests/profile.svg'
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 
