@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Product from '../Product/Product'
 import './Products.css'
 import { motion } from 'framer-motion';
-
-import axios from "axios";
+import { publicRequest } from "../../utils/requestMethod";
+// import axios from "axios";
 
 const Products = ({ cat,filters, headingText, innerpage }) => {
 
@@ -12,11 +12,11 @@ const Products = ({ cat,filters, headingText, innerpage }) => {
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const res = await axios.get(cat ? `http://localhost:5000/api/products?category=${cat}` : "http://localhost:5000/api/products");
+                const res = await publicRequest.get(cat ? `products?category=${cat}` : "/products");
                 setProducts(res.data);
-            } catch (error) {
+            } catch (error) {  
+             console.log("Error in getting products", error)
                 // res.error(error)
-
             }
         };
         getProducts()
@@ -39,9 +39,9 @@ const Products = ({ cat,filters, headingText, innerpage }) => {
             >{headingText}</motion.div>}
             <div className="products">
                 {(products.length !== 0) ? (cat ? filteredProducts.map((item) => (
-                    <Product item={item} key={item.id} />
+                    <Product item={item} key={item._id} />
                 )) : products.slice(0, 8).map((item) => (
-                    <Product item={item} key={item.id} />
+                    <Product item={item} key={item._id} />
                 ))) : <h1>Loading...</h1>}
             </div>
         </div>

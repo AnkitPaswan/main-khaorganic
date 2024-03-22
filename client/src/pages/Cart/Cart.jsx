@@ -8,13 +8,13 @@ import Header from '../../components/Header/Header'
 import Announcement from '../../components/Announcement/Announcement'
 import Footer from '../../components/Footer/Footer'
 import { useSelector } from "react-redux";
-import { incrementQuantity, decrementQuantity, removeItem } from "../../redux/cartRedux";
+import { incrementQuantity, decrementQuantity, removeFromCart } from "../../redux/cartSlice";
 import { useDispatch } from 'react-redux';
 
 const Cart = () => {
 
     const cart = useSelector(state => state.cart);
-  console.log(cart.total);
+  console.log(cart);
   const dispatch = useDispatch()
 
     return (
@@ -38,7 +38,7 @@ const Cart = () => {
               <span>Add something to make me happy :)</span>
             </div>}
                         {cart.products.map((product) => (
-                            <div className="product" key={product.id} product={product}>
+                            <div className="product" key={product._id} product={product}>
                                 <div className="product-detail">
                                     <img src={product.img} alt="" />
                                     <div className="details">
@@ -55,7 +55,7 @@ const Cart = () => {
                                 </div>
 
                                 <div className="PriceDetail">
-                                    <button onClick={() => dispatch(removeItem(product))} ><DeleteIcon /></button>
+                                    <button onClick={() => dispatch(removeFromCart(product))} ><DeleteIcon /></button>
                                     <div className="ProductAmountContainer">
                                         <div className="quantity-btn">
                                             <span onClick={() => dispatch(decrementQuantity(product))}><RemoveIcon /></span>
@@ -76,7 +76,7 @@ const Cart = () => {
                         </div>
                         <div className="SummaryItem">
                             <div className="SummaryItemText">SubTotal</div>
-                            <div className="SummaryItemPrice">&#8377; 500.00</div>
+                            <div className="SummaryItemPrice">&#8377; {cart.total}.00</div>
                         </div>
                         <div className="SummaryItem">
                             <div className="SummaryItemText">Estimated Shipping</div>
@@ -89,7 +89,7 @@ const Cart = () => {
                         <hr />
                         <div className="SummaryItem">
                             <div className="SummaryItemText" type="total"><span> Total</span></div>
-                            <div className="SummaryItemPrice"> <span>&#8377; 500.00</span></div>
+                            <div className="SummaryItemPrice"> <span>&#8377; {cart.total}.00</span></div>
 
                         </div>
                         <button>CHECKOUT NOW</button>

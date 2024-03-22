@@ -5,11 +5,39 @@ import SignIn from '../../assests/login.svg'
 import Profile from '../../assests/profile.svg'
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
-
+import { useState } from "react";
+import { login } from "../../redux/apiCalls";
+import {useDispatch, useSelector } from "react-redux";
 
 const LoginPage = () => {
+    
     const navigate = useNavigate();
+    const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
 
+  console.log( error);
+  
+  const handleSubmit = (e) => {
+  
+   if (!username || !password){
+    username === '' ? alert('Please enter username') : password === '' ? alert('Please enter password') :
+     alert('Please fill all fields')
+    return;
+   } 
+   else if (username === 'admin') {
+    alert('You are logged in as admin');
+   }
+   let userData = { username: username, password: password };
+   
+   login(dispatch, userData);
+   console.log(userData);
+
+   e.preventDefault();
+   navigate('/');
+    // login(dispatch, { username, password }
+  };
     return (
         <>
             <div className="main-login-container">
@@ -25,9 +53,10 @@ const LoginPage = () => {
                                 <PersonIcon />
                             </div>
                             <div>
-                                <h5>Email</h5>
+                                <h5>Username</h5>
                                 <input
-                                    type="email" className="input" placeholder='example@gmail.com' />
+                                    type="name" className="input" placeholder='ankitpaswan' required
+                                    onChange={(e) => setUsername(e.target.value)}/>
                             </div>
                         </div>
                         <div className="input-div two focus">
@@ -37,13 +66,11 @@ const LoginPage = () => {
                             <div>
                                 <h5>Password</h5>
                                 <input
-                                    type="password" className="input" placeholder='*****' />
+                                    type="password" className="input" placeholder='*****' onChange={(e) => setPassword(e.target.value)} required/>
                             </div>
                         </div>
                         <span onClick={() => navigate("/SignUp")}> Register Now?</span>
-                        {/* <b className="error">{ErrMsg}</b> */}
-                        <button type="submit" className="btn">LogIn</button>
-
+                        <button type="submit" className="btn" onClick={handleSubmit} disabled={isFetching}>LogIn</button>
                     </form>
                 </div>
             </div>

@@ -48,8 +48,7 @@ const Search = ({ setShowSearch }) => {
                             <h3>No result found "{query}"</h3>
                         ):
                        ( (query) && products.map((item) => (
-                           <div className="search-result-item" onClick={() => {
-                            // navigate(`/product/search?q=${item.title}`);
+                           <div className="search-result-item" key={item._id} onClick={() => {
                             navigate("/product/" + item._id);
                             setShowSearch(false);
                         }}>

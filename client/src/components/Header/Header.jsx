@@ -11,10 +11,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Search from "../Search/Search.jsx";
 import { useSelector } from "react-redux";
 import Categories from '../Categories/Categories'
+import { logout } from '../../redux/userSlice.js'
+import { useDispatch } from 'react-redux';
+
 
 const Header = () => {
-
-    const quantity = useSelector(state => state.cart.quantity)
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.currentUser);
+    const quantity = useSelector((state) => state.cart.quantity);
     const menuRef = useRef();
     const [showSearch, setShowSearch] = useState(false);
     const dropdown_toggle = (e) => {
@@ -66,10 +70,10 @@ const Header = () => {
                         </li>
                         <li>About</li>
                         <li onClick={() => navigate("/contactUs")}>Contact</li>
-                        <li className='sign' onClick={() => navigate("/Login")}> 
-                        <PermIdentityIcon/>
-                        Sign in</li>
-                        {/* <li onClick={() => navigate("/contactUs")}>Contact</li> */}
+                        {
+                            !user ? (<li className='sign' onClick={() => navigate("/Login")}> Sign in</li>):
+                        <li className='sign' onClick={() => dispatch(logout())}><PermIdentityIcon/>Logout</li>
+                        }
                     </div>
                     <div className="right">
                         <li> <SearchIcon onClick={() => setShowSearch(true)} /></li>
@@ -77,7 +81,11 @@ const Header = () => {
                             <ShoppingCartOutlinedIcon />
                             <span>{quantity}</span>
                         </span>
-                        <li className='sign' onClick={() => navigate("/Login")}>Sign in</li>
+                        {
+                            !user ? (<li className='sign' onClick={() => navigate("/Login")}>Sign in</li>):
+                        <li className='sign' onClick={() => dispatch(logout())}>Logout</li>
+                        }
+                        
                     </div>
                 </div>
             </header>

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { publicRequest } from "../../utils/requestMethod";
 import { useLocation } from 'react-router-dom';
 import './Product.css'
-import { addToCart } from "../../redux/cartRedux";
+import { addToCart } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';

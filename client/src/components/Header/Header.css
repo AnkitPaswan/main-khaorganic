@@ -235,11 +235,17 @@
 
     .hamburger-menu {
         display: flex;
-        justify-content: flex-start;
+        justify-content: center;
         align-items: center;
         cursor: pointer;
         margin-left: 0;
         width: 100px;
+    }
+
+    .left{
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .center {
@@ -293,9 +299,12 @@
         overflow: hidden;
     }
 
-    .center,
-    .right {
+    .center {
         display: none;
+    }
+
+    .right{
+        position: absolute;
     }
 
     .center {
@@ -309,6 +318,16 @@
         flex-direction: column;
     }
 
+}
+
+@media screen and (max-width: 330px){
+    .hamburger-menu {
+        justify-content: flex-start;
+    }
+
+    .logo{
+        display: none;
+    }
 }
 
 @keyframes slideMenuBar {

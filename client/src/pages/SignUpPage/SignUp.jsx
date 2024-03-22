@@ -6,11 +6,30 @@ import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { registerUser } from '../../redux/apiCalls';
+import { useDispatch, useSelector } from "react-redux";
 
 
 const SignUp = () => {
     const navigate = useNavigate();
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
 
+  console.log( error);
+  const handleClick = (e) => {
+    if (!username || !email || !password ){
+        username === '' ? alert('Please enter username') : email === '' ? alert('Please enter email') :  password === '' ? alert('Please enter password') : 
+         alert('Please fill all fields')
+        return;
+       } 
+    e.preventDefault();
+    navigate('/login');
+    registerUser(dispatch, { username,email, password });
+  }
     return (
         <>
             <div className="main-signup-container">
@@ -28,7 +47,9 @@ const SignUp = () => {
                             <div>
                                 <h5>Username</h5>
                                 <input
-                                    type="name" className="input" placeholder='ankitpaswan' />
+                                    type="name" className="input" placeholder='ankitpaswan' required
+                                     onChange={(e) => setUsername(e.target.value)}
+                                    />
                             </div>
                         </div>
                         <div className="input-div one focus ">
@@ -38,7 +59,8 @@ const SignUp = () => {
                             <div>
                                 <h5>Email</h5>
                                 <input
-                                    type="email" className="input" placeholder='ankitpaswan@gmail.com' />
+                                    type="email" className="input" placeholder='ankitpaswan@gmail.com' required
+                                     onChange={(e) => setEmail(e.target.value)} />
                             </div>
                         </div>
                         <div className="input-div two focus">
@@ -48,12 +70,12 @@ const SignUp = () => {
                             <div>
                                 <h5>Password</h5>
                                 <input
-                                    type="password" className="input" placeholder='******' />
+                                    type="password" className="input" placeholder='******' 
+                                     onChange={(e) => setPassword(e.target.value)} required/>
                             </div>
                         </div>
                         <span onClick={() => navigate("/Login")}>Already have an account? SignIn</span>
-                        {/* <b className="error">{ErrMsg}</b> */}
-                        <input type="submit" className="btn" value="SignUp" />
+                        <button type="submit" className="btn" onClick={handleClick} disabled={isFetching}>SignUp</button>
                     </form>
                 </div>
             </div>
