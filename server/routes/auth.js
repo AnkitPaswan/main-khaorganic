@@ -38,7 +38,7 @@ router.post("/login", async (req, res) => {
     const OriginalPassword = hashPassword.toString(CryptoJS.enc.Utf8);
 
     OriginalPassword !== req.body.password &&
-      res.status(401).json("Wrong Credentials!");
+      res.status(401).json("Invalid password!");
 
     const accessToken = jwt.sign(
       {

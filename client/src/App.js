@@ -12,6 +12,7 @@ import Cart from "./pages/Cart/Cart";
 import ContactUs from "./pages/ContactPage/ContactUs";
 import ProductList from "./pages/ProductList/ProductList";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -29,6 +30,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/contactUs" element={<ContactUs />} />
       </Routes>
+      <ToastContainer />
     </Router>
   );
 }

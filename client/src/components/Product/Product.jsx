@@ -5,14 +5,31 @@ import { useEffect } from "react";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { motion } from 'framer-motion';
-
+import { addToCart } from "../../redux/cartSlice";
+import { useDispatch } from "react-redux";
+import { toast } from 'react-toastify';
 
 const Product = ({ item }) => {
     const location = useLocation();
-    const navigate = useNavigate();
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location]);
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleClick = () => {
+        dispatch(
+            addToCart({ ...item, quantity: 1 })
+        );
+        toast.dark(`Successfully added ${item.title} to your cart`, {
+            // theme: "colored",
+            position: "bottom-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            pauseOnHover: false,
+        })
+    };
 
     return (
         <motion.div className="product-card"
@@ -20,23 +37,24 @@ const Product = ({ item }) => {
             transition={{ duration: 1 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: false }}
-            onClick={() => navigate(`/product/${item._id}`)}
-             >
 
-            <div className="thumbnail">
-                <img src={item.img} alt="" />
-            </div>
-            <div className="prod-details">
-                <span className="name">{item?.title}</span>
-                <span className="qty">QTY: {item?.qty}</span>
-                <span className="price">&#8377; {item?.price}</span>
+        >
+            <div onClick={() => navigate(`/product/${item._id}`)}>
+                <div className="thumbnail">
+                    <img src={item.img} alt="" />
+                </div>
+                <div className="prod-details">
+                    <span className="name">{item?.title}</span>
+                    <span className="qty">QTY: {item?.qty}</span>
+                    <span className="price">&#8377; {item?.price}</span>
+                </div>
             </div>
             <div className="prod-btn">
-                <div className="view-detail">
+                <div className="view-detail" onClick={() => navigate(`/product/${item._id}`)}>
                     <VisibilityIcon style={{ fontSize: "1.2em", color: "#539F22" }} />
                     View detail
                 </div>
-                <div className="shop-btn">
+                <div className="shop-btn" onClick={handleClick}>
                     < ShoppingBagIcon style={{ fontSize: "1.2em", color: "#539F22" }} />
                     Add to cart
                 </div>

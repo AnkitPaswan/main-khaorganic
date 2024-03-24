@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import Categories from '../Categories/Categories'
 import { logout } from '../../redux/userSlice.js'
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 
 const Header = () => {
@@ -29,6 +30,17 @@ const Header = () => {
     const navigate = useNavigate();
 
     const [isActive, setIsActive] = useState(false);
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        dispatch(logout());
+        toast.success('Logged out successfully', {
+            autoClose: 3000,
+            hideProgressBar: true,
+            pauseOnHover: false,
+            theme: "colored",
+        })
+    }
 
     const handleScroll = () => {
         const offset = window.scrollY;
@@ -64,15 +76,15 @@ const Header = () => {
                             </div>
                             {isActive && (
                                 <div className="dropdown-content">
-                                    <Categories/>
+                                    <Categories />
                                 </div>
                             )}
                         </li>
                         <li>About</li>
                         <li onClick={() => navigate("/contactUs")}>Contact</li>
                         {
-                            !user ? (<li className='sign' onClick={() => navigate("/Login")}> Sign in</li>):
-                        <li className='sign' onClick={() => dispatch(logout())}><PermIdentityIcon/>Logout</li>
+                            !user ? (<li className='sign' onClick={() => navigate("/Login")}> Sign in</li>) :
+                                <li className='sign' onClick={handleLogout}><PermIdentityIcon />Logout</li>
                         }
                     </div>
                     <div className="right">
@@ -82,10 +94,10 @@ const Header = () => {
                             <span>{quantity}</span>
                         </span>
                         {
-                            !user ? (<li className='sign' onClick={() => navigate("/Login")}>Sign in</li>):
-                        <li className='sign' onClick={() => dispatch(logout())}>Logout</li>
+                            !user ? (<li className='sign' onClick={() => navigate("/Login")}>Sign in</li>) :
+                                <li className='sign' onClick={handleLogout}>Logout</li>
                         }
-                        
+
                     </div>
                 </div>
             </header>

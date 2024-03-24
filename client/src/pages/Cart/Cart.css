@@ -1,5 +1,6 @@
 .wrapper {
     padding: 20px;
+    margin-bottom: 50px;
 }
 
 .wrapper h1 {
@@ -218,6 +219,43 @@ img {
 .summary button:hover {
     opacity: 0.9;
 }
+
+
+
+.cart-missing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    /* .empty-cart {
+    
+    } */
+  }
+   .svg {
+    width: 200px;
+  }
+
+  span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .emp-btn {
+    outline: 0;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    background-image: linear-gradient(to right, #1D7328, #539F22);
+    padding: 8px 30px;
+  }
 
 
 /* ------------media-query--------- */
