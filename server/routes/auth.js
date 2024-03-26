@@ -19,7 +19,15 @@ router.post("/register", async (req, res) => {
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (err) {
-    res.status(500).json(err);
+    // res.status(500).json(err);
+    // console.log(err);
+    if (!err.keyPattern || err.keyPattern.username) {
+      res.status(500).json("Username already exists!");
+    } else if (!err.keyPattern || err.keyPattern.email) {
+      res.status(500).json("email already exists!");
+    } else {
+      res.status(500).json("User already exists!");
+    }
   }
 });
 

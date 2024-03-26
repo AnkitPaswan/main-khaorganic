@@ -9,27 +9,54 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { registerUser } from '../../redux/apiCalls';
 import { useDispatch, useSelector } from "react-redux";
-
+import { toast } from 'react-toastify';
+import { publicRequest } from '../../utils/requestMethod';
 
 const SignUp = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  const { isFetching, error } = useSelector((state) => state.user);
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
+    const { isFetching, error } = useSelector((state) => state.user);
 
-  console.log( error);
-  const handleClick = (e) => {
-    if (!username || !email || !password ){
-        username === '' ? alert('Please enter username') : email === '' ? alert('Please enter email') :  password === '' ? alert('Please enter password') : 
-         alert('Please fill all fields')
-        return;
-       } 
-    e.preventDefault();
-    navigate('/login');
-    registerUser(dispatch, { username,email, password });
-  }
+    console.log(error);
+
+    const registerValidation = async () => {
+        try {
+            const res = await publicRequest.post('/auth/register', { username, email, password });
+            console.log(res);
+            if (res.data) {
+                registerUser(dispatch, { username, email, password });
+                navigate('/login');
+                toast.success('Account created successfully!', {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    theme: "colored",
+                })
+            }
+        } catch (error) {
+            console.log(error.response.data);
+            // console.log(error.response.data.keyPattern);
+            toast.error(error.response.data, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                theme: "colored",
+            })
+            // }
+        }
+    }
+    const handleClick = (e) => {
+        if (!username || !email || !password) {
+            username === '' ? toast.warn('Please enter username') : email === '' ? toast.warn('Please enter email') : password === '' ? toast.warn('Please enter password') :
+                toast.warn('Please fill all fields')
+            return;
+        }
+        e.preventDefault();
+        registerValidation(username, email, password);
+    }
     return (
         <>
             <div className="main-signup-container">
@@ -47,9 +74,9 @@ const SignUp = () => {
                             <div>
                                 <h5>Username</h5>
                                 <input
-                                    type="name" className="input" placeholder='ankitpaswan' required
-                                     onChange={(e) => setUsername(e.target.value)}
-                                    />
+                                    type="name" className="input" placeholder='ankitpaswan' minLength={5} required
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
                             </div>
                         </div>
                         <div className="input-div one focus ">
@@ -60,7 +87,7 @@ const SignUp = () => {
                                 <h5>Email</h5>
                                 <input
                                     type="email" className="input" placeholder='ankitpaswan@gmail.com' required
-                                     onChange={(e) => setEmail(e.target.value)} />
+                                    onChange={(e) => setEmail(e.target.value)} />
                             </div>
                         </div>
                         <div className="input-div two focus">
@@ -70,8 +97,8 @@ const SignUp = () => {
                             <div>
                                 <h5>Password</h5>
                                 <input
-                                    type="password" className="input" placeholder='******' 
-                                     onChange={(e) => setPassword(e.target.value)} required/>
+                                    type="password" className="input" placeholder='******'
+                                    onChange={(e) => setPassword(e.target.value)} minLength={6} required />
                             </div>
                         </div>
                         <span onClick={() => navigate("/Login")}>Already have an account? SignIn</span>

@@ -25,8 +25,6 @@ const LoginPage = () => {
         try {
             const res = await publicRequest.post('/auth/login', { username, password });
             console.log(res);
-
-            navigate('/');
             if (res.data) {
                 login(dispatch, { username, password });
                 navigate('/');
